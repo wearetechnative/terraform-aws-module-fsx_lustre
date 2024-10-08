@@ -26,7 +26,7 @@ variable "unit_storage_throughput" {
 }  
 
 variable "subnet_ids" {
-  type = list()
+  type = list(string)
   description = "A list of IDs for the security groups that apply to the specified network interfaces created for file system access."
 }  
 variable "weekly_maintenance_start_time" {
