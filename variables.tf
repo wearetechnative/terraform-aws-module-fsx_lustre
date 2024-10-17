@@ -1,6 +1,6 @@
 variable "storage_capacity" {
     type = number
-    description = "storage capacity of Lustre fs (amount of MB's)"  
+    description = "storage capacity of Lustre fs (amount of GB's)"  
 }
 
 variable "data_compression_type" {
