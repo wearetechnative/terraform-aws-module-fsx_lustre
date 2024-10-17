@@ -27,10 +27,6 @@ To use this module ...
 ```
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-No requirements.
-
 ## Providers
 
 | Name | Version |
@@ -54,6 +50,7 @@ No modules.
 | <a name="input_backup_retention_days"></a> [backup\_retention\_days](#input\_backup\_retention\_days) | Amount of days automatic backup retention | `number` | `0` | no |
 | <a name="input_data_compression_type"></a> [data\_compression\_type](#input\_data\_compression\_type) | can be LZ4 or NONE | `string` | n/a | yes |
 | <a name="input_deployment_type"></a> [deployment\_type](#input\_deployment\_type) | deployment type can be: SCRATCH\_1, SCRATCH\_2, PERSISTENT\_1, PERSISTENT\_2. | `string` | n/a | yes |
+| <a name="input_fsx_id"></a> [fsx\_id](#input\_fsx\_id) | fsx name/id | `string` | `""` | no |
 | <a name="input_log_destination"></a> [log\_destination](#input\_log\_destination) | he Amazon Resource Name (ARN) that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix | `string` | n/a | yes |
 | <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Sets which data repository events are logged by Amazon FSx. Valid values are WARN\_ONLY, FAILURE\_ONLY, ERROR\_ONLY, WARN\_ERROR and DISABLED | `string` | n/a | yes |
 | <a name="input_storage_capacity"></a> [storage\_capacity](#input\_storage\_capacity) | storage capacity of Lustre fs (amount of MB's) | `number` | n/a | yes |
