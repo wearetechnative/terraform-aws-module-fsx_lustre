@@ -11,4 +11,8 @@ resource "aws_fsx_lustre_file_system" "hpc" {
     destination = var.log_destination
     level       = var.log_level
   }
+
+  tags = {
+        Name = var.fsx_id
+          }
 }

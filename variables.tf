@@ -1,6 +1,6 @@
 variable "storage_capacity" {
     type = number
-    description = "storage capacity of Lustre fs (amount of GB's)"  
+    description = "storage capacity of Lustre fs (amount of MB's)"  
 }
 
 variable "data_compression_type" {
@@ -43,5 +43,9 @@ variable "log_level" {
     type = string
     description = " Sets which data repository events are logged by Amazon FSx. Valid values are WARN_ONLY, FAILURE_ONLY, ERROR_ONLY, WARN_ERROR and DISABLED"
 }
- 
 
+variable "fsx_id" {
+    type = string
+    description = "fsx name/id"
+    default = ""
+}
