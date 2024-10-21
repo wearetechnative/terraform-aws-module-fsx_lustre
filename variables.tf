@@ -34,14 +34,15 @@ variable "weekly_maintenance_start_time" {
   description = "The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone."
 }
 
-variable "log_destination" {
-    type = string
-    description = "he Amazon Resource Name (ARN) that specifies the destination of the logs. The name of the Amazon CloudWatch Logs log group must begin with the /aws/fsx prefix"
-  
-}
 variable "log_level" {
     type = string
     description = " Sets which data repository events are logged by Amazon FSx. Valid values are WARN_ONLY, FAILURE_ONLY, ERROR_ONLY, WARN_ERROR and DISABLED"
+}
+
+variable "log_retention_days" {
+    type = string
+    default = "7"
+    description = ""
 }
 
 variable "fsx_id" {
@@ -49,3 +50,4 @@ variable "fsx_id" {
     description = "fsx name/id"
     default = ""
 }
+

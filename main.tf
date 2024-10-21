@@ -7,12 +7,24 @@ resource "aws_fsx_lustre_file_system" "hpc" {
   per_unit_storage_throughput     = var.unit_storage_throughput
   subnet_ids                      = var.subnet_ids
   weekly_maintenance_start_time   = var.weekly_maintenance_start_time
-  log_configuration {
-    destination = var.log_destination
-    level       = var.log_level
+	dynamic "log_configuration" {
+    for_each = var.log_retention_days != null && var.log_level != null ? [1] : []
+
+    content {
+      destination = aws_cloudwatch_log_group.lustre[0].arn
+      level       = var.log_level
+    }
   }
 
   tags = {
         Name = var.fsx_id
           }
 }
+
+resource "aws_cloudwatch_log_group" "lustre" {
+    count = var.log_retention_days != null ? 1 : 0
+  name = "/aws/fsx/lustre/lustre-${var.fsx_id}"
+  retention_in_days = 7
+}
+
+
