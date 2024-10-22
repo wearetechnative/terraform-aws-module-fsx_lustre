@@ -27,6 +27,10 @@ To use this module ...
 ```
 
 <!-- BEGIN_TF_DOCS -->
+## Requirements
+
+No requirements.
+
 ## Providers
 
 | Name | Version |
