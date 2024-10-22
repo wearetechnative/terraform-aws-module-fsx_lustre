@@ -43,6 +43,8 @@ No modules.
 |------|------|
 | [aws_cloudwatch_log_group.lustre](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/cloudwatch_log_group) | resource |
 | [aws_fsx_lustre_file_system.hpc](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/fsx_lustre_file_system) | resource |
+| [aws_security_group.fsx_sg](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/resources/security_group) | resource |
+| [aws_subnet.selected](https://registry.terraform.io/providers/hashicorp/aws/latest/docs/data-sources/subnet) | data source |
 
 ## Inputs
 
@@ -65,4 +67,5 @@ No modules.
 |------|-------------|
 | <a name="output_lustre_arn"></a> [lustre\_arn](#output\_lustre\_arn) | n/a |
 | <a name="output_lustre_dns_name"></a> [lustre\_dns\_name](#output\_lustre\_dns\_name) | n/a |
+| <a name="output_lustre_securitygroup_id"></a> [lustre\_securitygroup\_id](#output\_lustre\_securitygroup\_id) | n/a |
 <!-- END_TF_DOCS -->
