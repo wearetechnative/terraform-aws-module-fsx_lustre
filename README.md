@@ -27,10 +27,6 @@ To use this module ...
 ```
 
 <!-- BEGIN_TF_DOCS -->
-## Requirements
-
-No requirements.
-
 ## Providers
 
 | Name | Version |
@@ -69,7 +65,7 @@ No modules.
 
 | Name | Description |
 |------|-------------|
-| <a name="output_lustre_arn"></a> [lustre\_arn](#output\_lustre\_arn) | n/a |
-| <a name="output_lustre_dns_name"></a> [lustre\_dns\_name](#output\_lustre\_dns\_name) | n/a |
-| <a name="output_lustre_securitygroup_id"></a> [lustre\_securitygroup\_id](#output\_lustre\_securitygroup\_id) | n/a |
+| <a name="output_lustre_arn"></a> [lustre\_arn](#output\_lustre\_arn) | ARN of the FSx-Lustre |
+| <a name="output_lustre_dns_name"></a> [lustre\_dns\_name](#output\_lustre\_dns\_name) | DNS name of the FSx-Lustre |
+| <a name="output_lustre_securitygroup_id"></a> [lustre\_securitygroup\_id](#output\_lustre\_securitygroup\_id) | ID of the security\_group created for the FSx-Lustre |
 <!-- END_TF_DOCS -->
