@@ -5,3 +5,7 @@ output "lustre_arn" {
 output "lustre_dns_name" {
   value = aws_fsx_lustre_file_system.hpc.dns_name
 }
+
+output "Lustre_id" {
+  value = aws_fsx_lustre_file_system.hpc.id
+}
