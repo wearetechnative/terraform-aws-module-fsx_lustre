@@ -1,4 +1,4 @@
-# Terraform AWS [terraform-aws-module-fsx_lustre] ![](https://img.shields.io/github/workflow/status/wearetechnative/terraform-aws-module-fsx_lustre/tflint.yaml?branch=main)
+# Terraform AWS [terraform-aws-module-fsx_lustre] ![](https://img.shields.io/github/actions/workflow/status/wearetechnative/terraform-aws-module-fsx_lustre/tflint.yaml?style=plastic)
 
 <!-- SHIELDS -->
 
