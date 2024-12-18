@@ -29,14 +29,17 @@ variable "subnet_ids" {
   type = list(string)
   description = "A list of IDs for the security groups that apply to the specified network interfaces created for file system access."
 }  
+
 variable "weekly_maintenance_start_time" {
   type = string
   description = "The preferred start time (in d:HH:MM format) to perform weekly maintenance, in the UTC time zone."
+  default = "6:01:30"
 }
 
 variable "log_level" {
     type = string
     description = " Sets which data repository events are logged by Amazon FSx. Valid values are WARN_ONLY, FAILURE_ONLY, ERROR_ONLY, WARN_ERROR and DISABLED"
+    default = "WARN_ERROR"
 }
 
 variable "log_retention_days" {

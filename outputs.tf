@@ -16,3 +16,6 @@ output "lustre_securitygroup_id" {
   description = "ID of the security_group created for the FSx-Lustre"
 }
 
+output "lustre_mountpoint" {
+  value = aws_fsx_lustre_file_system.hpc.mount_name
+}
