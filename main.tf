@@ -36,7 +36,7 @@ resource "aws_cloudwatch_log_group" "lustre" {
 } 
 
 resource "aws_security_group" "fsx_sg" {
-  name        = "fsx_lustre_sg"
+  name        = "fsx_lustre_sg_${var.fsx_id}"
   description = "Allow Lustre LNET traffic"
   vpc_id      = data.aws_subnet.selected.vpc_id
 
