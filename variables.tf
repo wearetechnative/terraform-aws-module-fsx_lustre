@@ -71,6 +71,12 @@ variable "dra_bucket_force_destroy" {
   default     = false
 }
 
+variable "retain_dra_bucket" {
+  type        = bool
+  description = "Prevents Terraform from deleting the data repository bucket so data stays available after the FSx file system is removed."
+  default     = true
+}
+
 variable "dra_imported_file_chunk_size" {
   type        = number
   description = "Size of chunks (in MiB) for files imported from the data repository."
