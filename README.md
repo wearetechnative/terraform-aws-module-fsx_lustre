@@ -18,13 +18,44 @@ See [pre-commit installation](https://pre-commit.com/#install) on how to install
 
 ## Usage
 
-To use this module ...
+1. Configure the AWS provider in your root module (not shown below).
+2. Add a module block that points to this repository and supply the required variables for capacity, throughput, networking and logging.
+3. (Optional) Enable the data repository association (DRA) if you need to sync data to an S3 bucket.
+
+### Minimal example
 
 ```hcl
-{
-  some_conf = "might need explanation"
+module "fsx_lustre" {
+  source = "git::https://github.com/wearetechnative/terraform-aws-fsx_lustre.git?ref=main"
+
+  fsx_id                    = "hpc-fsx"
+  storage_capacity          = 1200                # In MB
+  data_compression_type     = "LZ4"
+  deployment_type           = "PERSISTENT_2"
+  unit_storage_throughput   = 125                 # MB/s per TiB
+  subnet_ids                = ["subnet-0123456789abcdef0"]
+  weekly_maintenance_start_time = "6:01:30"
+  log_level                 = "WARN_ERROR"
+  log_retention_days        = 7
 }
 ```
+
+### Enabling the optional data repository association
+
+```hcl
+module "fsx_lustre" {
+  source = "git::https://github.com/wearetechnative/terraform-aws-fsx_lustre.git?ref=main"
+  # ...same required arguments as above...
+
+  create_dra               = true
+  dra_bucket_name          = "my-lustre-data-repository"
+  dra_bucket_force_destroy = true
+  dra_auto_import_events   = ["NEW", "CHANGED"]
+  dra_auto_export_events   = ["NEW", "CHANGED", "DELETED"]
+}
+```
+
+The module exports identifiers and connection details for the created FSx for Lustre file system and, when enabled, the associated S3 data repository. Those outputs can be referenced in other parts of your configuration (see [Outputs](#outputs) below).
 
 <!-- BEGIN_TF_DOCS -->
 ## Providers
