@@ -61,19 +61,26 @@ resource "aws_security_group" "fsx_sg" {
   }
 }
 
-resource "aws_s3_bucket" "lustre_repository" {
-  for_each = local.dra_config
+resource "aws_s3_bucket" "lustre_repository_retained" {
+  for_each = var.retain_dra_bucket ? local.dra_config : {}
 
   bucket        = each.value
   force_destroy = var.dra_bucket_force_destroy
 
   lifecycle {
-    prevent_destroy = var.retain_dra_bucket
+    prevent_destroy = true
   }
 }
 
+resource "aws_s3_bucket" "lustre_repository" {
+  for_each = var.retain_dra_bucket ? {} : local.dra_config
+
+  bucket        = each.value
+  force_destroy = var.dra_bucket_force_destroy
+}
+
 resource "aws_s3_bucket_public_access_block" "lustre_repository" {
-  for_each = aws_s3_bucket.lustre_repository
+  for_each = local.lustre_repository_buckets
 
   bucket                  = each.value.id
   block_public_acls       = true
@@ -83,7 +90,7 @@ resource "aws_s3_bucket_public_access_block" "lustre_repository" {
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "lustre_repository" {
-  for_each = aws_s3_bucket.lustre_repository
+  for_each = local.lustre_repository_buckets
 
   bucket = each.value.id
 
@@ -98,7 +105,7 @@ resource "aws_fsx_data_repository_association" "lustre_bucket" {
   for_each = local.dra_config
 
   file_system_id           = aws_fsx_lustre_file_system.hpc.id
-  data_repository_path     = "s3://${aws_s3_bucket.lustre_repository[each.key].bucket}"
+  data_repository_path     = "s3://${local.lustre_repository_buckets[each.key].bucket}"
   file_system_path         = "/"
   imported_file_chunk_size = var.dra_imported_file_chunk_size
 
