@@ -62,7 +62,6 @@ No modules.
 | <a name="input_dra_auto_import_events"></a> [dra\_auto_import_events](#input\_dra_auto_import_events) | FSx auto import event types to propagate from S3 to Lustre. | `list(string)` | `["NEW","CHANGED","DELETED"]` | no |
 | <a name="input_dra_bucket_force_destroy"></a> [dra\_bucket_force_destroy](#input\_dra_bucket_force_destroy) | Whether to force destroy the data repository bucket when deleting the stack. | `bool` | `false` | no |
 | <a name="input_dra_bucket_name"></a> [dra\_bucket_name](#input\_dra_bucket_name) | Name of the S3 bucket to create for the data repository association. Required when create\_dra is true. | `string` | `null` | no |
-| <a name="input_retain_dra_bucket"></a> [retain\_dra_bucket](#input\_retain_dra_bucket) | Prevents Terraform from deleting the data repository bucket so data stays available after the FSx file system is removed. | `bool` | `true` | no |
 | <a name="input_dra_imported_file_chunk_size"></a> [dra\_imported_file_chunk_size](#input\_dra_imported_file_chunk_size) | Size of chunks (in MiB) for files imported from the data repository. | `number` | `1024` | no |
 | <a name="input_fsx_id"></a> [fsx\_id](#input\_fsx\_id) | fsx name/id | `string` | `""` | no |
 | <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Sets which data repository events are logged by Amazon FSx. Valid values are WARN\_ONLY, FAILURE\_ONLY, ERROR\_ONLY, WARN\_ERROR and DISABLED | `string` | n/a | yes |
