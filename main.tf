@@ -97,6 +97,7 @@ resource "aws_fsx_data_repository_association" "lustre_bucket" {
   data_repository_path     = "s3://${aws_s3_bucket.lustre_repository[each.key].bucket}"
   file_system_path         = "/"
   imported_file_chunk_size = var.dra_imported_file_chunk_size
+  batch_import_meta_data_on_create = true
 
   timeouts {
     create = "20m"
