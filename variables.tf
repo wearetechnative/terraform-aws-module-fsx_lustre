@@ -69,8 +69,10 @@ variable "dra_directories" {
   type = map(object({
     bucket_name      = string
     file_system_path = string
+    auto_export_events = optional(list(string))
+    auto_import_events = optional(list(string))
   }))
-  description = "Map of data repository associations to create, keyed by an identifier. Each entry defines a bucket name and file system path."
+  description = "Map of data repository associations to create, keyed by an identifier. Each entry defines a bucket name, file system path, and optional auto import/export events."
   default     = {}
 }
 
