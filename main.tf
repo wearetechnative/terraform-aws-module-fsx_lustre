@@ -106,11 +106,11 @@ resource "aws_fsx_data_repository_association" "lustre_bucket" {
 
   s3 {
     auto_export_policy {
-      events = coalesce(each.value.auto_export_events, var.dra_auto_export_events)
+      events = each.value.auto_export_events
     }
 
     auto_import_policy {
-      events = coalesce(each.value.auto_import_events, var.dra_auto_import_events)
+      events = each.value.auto_import_events
     }
   }
 }

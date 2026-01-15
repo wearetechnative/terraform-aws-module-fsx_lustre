@@ -66,7 +66,7 @@ variable "dra_directories" {
 
 variable "dra_bucket_force_destroy" {
   type        = bool
-  description = "Whether to force destroy the data repository bucket when deleting the stack."
+  description = "Whether to force destroy the data repository buckets when deleting the stack."
   default     = false
 }
 
@@ -76,14 +76,3 @@ variable "dra_imported_file_chunk_size" {
   default     = 1024
 }
 
-variable "dra_auto_export_events" {
-  type        = list(string)
-  description = "FSx auto export event types to propagate from Lustre to S3."
-  default     = ["NEW", "CHANGED", "DELETED"]
-}
-
-variable "dra_auto_import_events" {
-  type        = list(string)
-  description = "FSx auto import event types to propagate from S3 to Lustre."
-  default     = ["NEW", "CHANGED", "DELETED"]
-}
