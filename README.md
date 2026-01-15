@@ -55,6 +55,28 @@ module "fsx_lustre" {
 }
 ```
 
+### Creating multiple data repository associations
+
+```hcl
+module "fsx_lustre" {
+  source = "git::https://github.com/wearetechnative/terraform-aws-fsx_lustre.git?ref=main"
+  # ...same required arguments as above...
+
+  dra_directories = {
+    logs = {
+      bucket_name      = "my-lustre-logs"
+      file_system_path = "/logs"
+    }
+    data = {
+      bucket_name      = "my-lustre-data"
+      file_system_path = "/data"
+    }
+  }
+}
+```
+
+When `dra_directories` is set, the single DRA inputs (`create_dra` and `dra_bucket_name`) are ignored.
+
 The module exports identifiers and connection details for the created FSx for Lustre file system and, when enabled, the associated S3 data repository. Those outputs can be referenced in other parts of your configuration (see [Outputs](#outputs) below).
 
 <!-- BEGIN_TF_DOCS -->
@@ -86,13 +108,14 @@ No modules.
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_backup_retention_days"></a> [backup\_retention\_days](#input\_backup\_retention\_days) | Amount of days automatic backup retention | `number` | `0` | no |
-| <a name="input_create_dra"></a> [create\_dra](#input\_create\_dra) | Whether to create an FSx data repository association backed by an S3 bucket. | `bool` | `false` | no |
+| <a name="input_create_dra"></a> [create\_dra](#input\_create\_dra) | Whether to create a single FSx data repository association backed by an S3 bucket. | `bool` | `false` | no |
 | <a name="input_data_compression_type"></a> [data\_compression\_type](#input\_data\_compression\_type) | can be LZ4 or NONE | `string` | n/a | yes |
 | <a name="input_deployment_type"></a> [deployment\_type](#input\_deployment\_type) | deployment type can be: SCRATCH\_1, SCRATCH\_2, PERSISTENT\_1, PERSISTENT\_2. | `string` | n/a | yes |
 | <a name="input_dra_auto_export_events"></a> [dra\_auto_export_events](#input\_dra_auto_export_events) | FSx auto export event types to propagate from Lustre to S3. | `list(string)` | `["NEW","CHANGED","DELETED"]` | no |
 | <a name="input_dra_auto_import_events"></a> [dra\_auto_import_events](#input\_dra_auto_import_events) | FSx auto import event types to propagate from S3 to Lustre. | `list(string)` | `["NEW","CHANGED","DELETED"]` | no |
 | <a name="input_dra_bucket_force_destroy"></a> [dra\_bucket_force_destroy](#input\_dra_bucket_force_destroy) | Whether to force destroy the data repository bucket when deleting the stack. | `bool` | `false` | no |
-| <a name="input_dra_bucket_name"></a> [dra\_bucket_name](#input\_dra_bucket_name) | Name of the S3 bucket to create for the data repository association. Required when create\_dra is true. | `string` | `null` | no |
+| <a name="input_dra_bucket_name"></a> [dra\_bucket_name](#input\_dra_bucket_name) | Name of the S3 bucket to create for the single data repository association. Required when create\_dra is true. | `string` | `null` | no |
+| <a name="input_dra_directories"></a> [dra\_directories](#input\_dra_directories) | Map of data repository associations to create, keyed by an identifier. Each entry defines a bucket name and file system path. | `map(object({ bucket_name = string, file_system_path = string }))` | `{}` | no |
 | <a name="input_dra_imported_file_chunk_size"></a> [dra\_imported_file_chunk_size](#input\_dra_imported_file_chunk_size) | Size of chunks (in MiB) for files imported from the data repository. | `number` | `1024` | no |
 | <a name="input_fsx_id"></a> [fsx\_id](#input\_fsx\_id) | fsx name/id | `string` | `""` | no |
 | <a name="input_log_level"></a> [log\_level](#input\_log\_level) | Sets which data repository events are logged by Amazon FSx. Valid values are WARN\_ONLY, FAILURE\_ONLY, ERROR\_ONLY, WARN\_ERROR and DISABLED | `string` | n/a | yes |
@@ -110,5 +133,7 @@ No modules.
 | <a name="output_lustre_dns_name"></a> [lustre\_dns\_name](#output\_lustre\_dns\_name) | DNS name of the FSx-Lustre |
 | <a name="output_data_repository_bucket_name"></a> [data\_repository\_bucket\_name](#output\_data_repository_bucket_name) | Name of the S3 bucket created for the data repository association (if enabled). |
 | <a name="output_data_repository_association_id"></a> [data\_repository\_association\_id](#output\_data_repository_association_id) | ID of the data repository association (if enabled). |
+| <a name="output_data_repository_bucket_names"></a> [data\_repository\_bucket\_names](#output\_data_repository_bucket_names) | Map of data repository bucket names keyed by the association identifier. |
+| <a name="output_data_repository_association_ids"></a> [data\_repository\_association\_ids](#output\_data_repository_association_ids) | Map of data repository association IDs keyed by the association identifier. |
 | <a name="output_lustre_securitygroup_id"></a> [lustre\_securitygroup\_id](#output\_lustre\_securitygroup\_id) | ID of the security\_group created for the FSx-Lustre |
 <!-- END_TF_DOCS -->

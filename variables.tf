@@ -55,14 +55,23 @@ variable "fsx_id" {
 
 variable "create_dra" {
   type        = bool
-  description = "Whether to create an FSx data repository association backed by an S3 bucket."
+  description = "Whether to create a single FSx data repository association backed by an S3 bucket."
   default     = false
 }
 
 variable "dra_bucket_name" {
   type        = string
-  description = "Name of the S3 bucket to create for the data repository association. Required when create_dra is true."
+  description = "Name of the S3 bucket to create for the single data repository association. Required when create_dra is true."
   default     = null
+}
+
+variable "dra_directories" {
+  type = map(object({
+    bucket_name      = string
+    file_system_path = string
+  }))
+  description = "Map of data repository associations to create, keyed by an identifier. Each entry defines a bucket name and file system path."
+  default     = {}
 }
 
 variable "dra_bucket_force_destroy" {

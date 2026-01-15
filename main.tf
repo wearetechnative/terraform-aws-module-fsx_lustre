@@ -64,7 +64,7 @@ resource "aws_security_group" "fsx_sg" {
 resource "aws_s3_bucket" "lustre_repository" {
   for_each = local.dra_config
 
-  bucket        = each.value
+  bucket        = each.value.bucket_name
   force_destroy = var.dra_bucket_force_destroy
 }
 
@@ -95,7 +95,7 @@ resource "aws_fsx_data_repository_association" "lustre_bucket" {
 
   file_system_id           = aws_fsx_lustre_file_system.hpc.id
   data_repository_path     = "s3://${aws_s3_bucket.lustre_repository[each.key].bucket}"
-  file_system_path         = "/"
+  file_system_path         = each.value.file_system_path
   imported_file_chunk_size = var.dra_imported_file_chunk_size
   batch_import_meta_data_on_create = true
 
