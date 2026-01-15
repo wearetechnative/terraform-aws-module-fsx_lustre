@@ -20,7 +20,7 @@ See [pre-commit installation](https://pre-commit.com/#install) on how to install
 
 1. Configure the AWS provider in your root module (not shown below).
 2. Add a module block that points to this repository and supply the required variables for capacity, throughput, networking and logging.
-3. (Optional) Enable the data repository association (DRA) if you need to sync data to an S3 bucket.
+3. (Optional) Configure `dra_directories` to create one or more data repository associations (DRAs) to S3.
 
 ### Minimal example
 
@@ -48,11 +48,15 @@ module "fsx_lustre" {
   # ...same required arguments as above...
 
   dra_directories = {
+    root = {
+      bucket_name      = "my-lustre-root"
+      file_system_path = "/"
+      auto_import_events = ["NEW", "CHANGED"]
+      auto_export_events = ["NEW", "CHANGED", "DELETED"]
+    }
     logs = {
       bucket_name      = "my-lustre-logs"
       file_system_path = "/logs"
-      auto_import_events = ["NEW", "CHANGED"]
-      auto_export_events = ["NEW", "CHANGED", "DELETED"]
     }
     data = {
       bucket_name      = "my-lustre-data"
