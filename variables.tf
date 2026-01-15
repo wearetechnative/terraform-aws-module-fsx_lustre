@@ -53,18 +53,6 @@ variable "fsx_id" {
   default     = ""
 }
 
-variable "create_dra" {
-  type        = bool
-  description = "Whether to create a single FSx data repository association backed by an S3 bucket."
-  default     = false
-}
-
-variable "dra_bucket_name" {
-  type        = string
-  description = "Name of the S3 bucket to create for the single data repository association. Required when create_dra is true."
-  default     = null
-}
-
 variable "dra_directories" {
   type = map(object({
     bucket_name      = string

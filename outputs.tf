@@ -20,16 +20,6 @@ output "lustre_mountpoint" {
   value = aws_fsx_lustre_file_system.hpc.mount_name
 }
 
-output "data_repository_bucket_name" {
-  description = "Name of the S3 bucket created for the data repository association (if enabled)."
-  value       = local.dra_single_enabled ? aws_s3_bucket.lustre_repository["default"].bucket : null
-}
-
-output "data_repository_association_id" {
-  description = "ID of the data repository association (if enabled)."
-  value       = local.dra_single_enabled ? aws_fsx_data_repository_association.lustre_bucket["default"].id : null
-}
-
 output "data_repository_bucket_names" {
   description = "Map of data repository bucket names keyed by the association identifier."
   value       = { for key, bucket in aws_s3_bucket.lustre_repository : key => bucket.bucket }
