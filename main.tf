@@ -66,6 +66,9 @@ resource "aws_s3_bucket" "lustre_repository" {
 
   bucket        = each.value.bucket_name
   force_destroy = var.dra_bucket_force_destroy
+  lifecycle {
+    prevent_destroy = true
+  }
 }
 
 resource "aws_s3_bucket_public_access_block" "lustre_repository" {
